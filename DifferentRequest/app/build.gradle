@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'joe'
+            keyPassword '123456'
+            storeFile file('/Users/joe/Desktop/DifferentRequest/app/key.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion "22.0.1"
+    defaultConfig {
+        applicationId "com.joe.differentrequest"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable false
+        }
+    }
+    productFlavors {
+        product {
+            applicationId 'product.com.joe.differentrequest'
+            versionName '1.0-product'
+        }
+        uat {
+            applicationId 'uat.com.joe.differentrequest'
+            versionName '1.0-uat'
+        }
+        nduat {
+            applicationId 'uduat.com.joe.differentrequest'
+            versionName '1.0-uduat'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+}
